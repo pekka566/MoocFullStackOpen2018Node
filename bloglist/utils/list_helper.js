@@ -41,6 +41,28 @@ const mostBlogs = (array) => {
     }
 }
 
+const mostLikes = (array) => {
+  const bloggersMap = new Map()
+  array.forEach( x => {
+    if(bloggersMap.has(x.author)){
+      bloggersMap.set(x.author, bloggersMap.get(x.author) + x.likes);
+    } else {
+      bloggersMap.set(x.author, x.likes);
+    }
+  } )
+
+  const sortedArray = Array
+    .from(bloggersMap)
+    .sort((a, b) => {
+      return b[1] - a[1];
+    })
+
+  return {
+      author: sortedArray[0][0],
+      likes: sortedArray[0][1]
+    }
+}
+
 module.exports = {
-  dummy, totalLikes, favoriteBlog, mostBlogs
+  dummy, totalLikes, favoriteBlog, mostBlogs, mostLikes
 }

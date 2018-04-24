@@ -97,7 +97,7 @@ describe('favorite blog', () => {
   })
 })
 
-describe('favorite blog', () => {
+describe('most blogs', () => {
   const mostBlogger = {
     author: "Robert C. Martin",
     blogs: 3
@@ -107,5 +107,17 @@ describe('favorite blog', () => {
     const result = listHelper.mostBlogs(blogs)
     expect(result).toEqual(mostBlogger)
   })
-
 })
+
+describe('most likes', () => {
+  const mostLikes = {
+    author: "Edsger W. Dijkstra",
+    likes: 17
+  }
+
+  test('when list has many likes equals the most liked of that', () => {
+    const result = listHelper.mostLikes(blogs)
+    expect(result).toEqual(mostLikes)
+  })
+})
+
