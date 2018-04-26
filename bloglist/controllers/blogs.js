@@ -11,7 +11,9 @@ blogsRouter.get('/', (request, response) => {
 
 blogsRouter.post('/', (request, response) => {
   const blog = new Blog(request.body)
-
+  if(!blog.likes){
+    blog.likes = 0;
+  }
   console.log(blog)
 
   blog
@@ -19,6 +21,17 @@ blogsRouter.post('/', (request, response) => {
     .then(result => {
       response.status(201).json(result)
     })
+})
+
+blogsRouter.delete('/:id', async (request, response) => {
+  try {
+    await Blog.findByIdAndRemove(request.params.id)
+
+    response.status(204).end()
+  } catch (exception) {
+    console.log(exception)
+    response.status(400).send({ error: 'malformatted id' })
+  }
 })
 
 module.exports = blogsRouter
